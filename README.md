@@ -22,3 +22,11 @@ Expected address once successfully deployed: https://pugplayzyt.github.io/auto-s
 ## Marking names
 
 “Mark all” uses exact, case-sensitive whole-name matches. You can also select text in the editor, choose a character, and click “Mark name”. Markers such as `{{character-1}}` represent that character's occurrences. The preview replaces markers with the new name, or retains the original if the new field is blank. Removing a character restores their original name in the editor.
+
+## Settings and offline installation
+
+Open **Settings** to choose Light, Dark, or Use device setting. The appearance preference is saved on this device. Stories remain temporary.
+
+On the HTTPS GitHub Pages site, wait for Settings to show **Ready for offline use on this device**. Use **Install app** when offered, or your browser's install menu. On iOS, use Safari → Share → Add to Home Screen. Browser support determines which install option is available. After the initial cache completes, the editor, examples and name replacement work without internet. Copy your work before closing or reloading; offline support does not save your story.
+
+The service worker caches only the static app files and is scoped to this repository's URL. When changing the app shell or its file list, bump the cache version in `sw.js`. New content also refreshes during online visits. No external fonts or runtime services are required.
