@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {markOccurrences, personalize, examples} from './story.js';
+test('marks full names, preserving substrings, capitalization and existing markers',()=>{assert.equal(markOccurrences('Ann met Anna and Ann. ann {{character-2}}','Ann','character-1'),'{{character-1}} met Anna and {{character-1}}. ann {{character-2}}');});
+test('names with regex punctuation and Unicode work',()=>{assert.equal(markOccurrences('Zoë met Zoë.','Zoë','character-1'),'{{character-1}} met {{character-1}}.');assert.equal(markOccurrences('A.J. met A.J.','A.J.','character-1'),'{{character-1}} met {{character-1}}');});
+test('replacements occur once and blank names retain originals',()=>{assert.equal(personalize('{{character-1}} met {{character-2}}',[{id:'character-1',original:'Maya',replacement:'{{character-2}}'},{id:'character-2',original:'Leo',replacement:''}]),'{{character-2}} met Leo');});
+test('all examples personalize without leftover markers or original names',()=>{for(const example of examples){const characters=example.names.map((original,i)=>({id:`character-${i+1}`,original,replacement:`Hero${i+1}`}));let story=example.story;for(const c of characters)story=markOccurrences(story,c.original,c.id);const output=personalize(story,characters);assert.ok(output.includes('Hero1'));assert.ok(!output.includes('{{'));for(const name of example.names)assert.ok(!output.includes(name));}});
