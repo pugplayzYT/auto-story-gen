@@ -1,5 +1,5 @@
 const CACHE_PREFIX = `auto-story-${self.registration.scope}-`;
-const CACHE = `${CACHE_PREFIX}v1`;
+const CACHE = `${CACHE_PREFIX}v2`;
 const FILES = ['./', './index.html', './style.css', './app.js', './story.js', './settings.js', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));
